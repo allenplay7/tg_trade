@@ -1,0 +1,16 @@
+telethon>=1.36
+python-binance>=1.0.19
+python-dotenv>=1.0
+pillow>=10.0
+pytesseract>=0.3.10
+aiohttp>=3.9
+# --- browser mode (main_browser.py) ---
+playwright>=1.44
+httpx>=0.27
+# --- backtest + dashboard ---
+pandas>=2.0
+numpy>=1.24
+plotly>=5.18
+streamlit>=1.30
+pyarrow>=14.0
+python-dateutil>=2.8

@@ -1,0 +1,324 @@
+2026-05-12 16:37:36,632 [INFO] main: Launching browser (headless=False)...
+2026-05-12 16:37:37,317 [INFO] main: Navigating to https://web.telegram.org/k/#@high_table_channel
+2026-05-12 16:37:41,719 [INFO] main: Waiting for Telegram Web to load — log in with your phone / QR code if prompted...
+2026-05-12 16:38:58,788 [INFO] main: Channel loaded. Installing message observer...
+2026-05-12 16:38:58,792 [INFO] notifier: NOTIFY (bot token not set): Bot started (browser mode).
+Paper trading: True
+Channel: @high_table_channel
+Position size: 3.0% (1.0% on risky calls)
+Entry mode: MARKET
+2026-05-12 16:38:58,793 [INFO] main: Bot running. Ctrl-C to stop.
+2026-05-12 16:49:39,606 [INFO] main: Launching browser (headless=False)...
+2026-05-12 16:49:39,882 [INFO] main: Navigating to https://web.telegram.org/k/#@high_table_channel
+2026-05-12 16:49:40,000 [INFO] main: Waiting for Telegram Web to load — log in with your phone / QR code if prompted...
+2026-05-12 16:49:48,093 [INFO] main: Channel loaded. Installing message observer...
+2026-05-12 16:49:48,097 [INFO] notifier: NOTIFY (bot token not set): Bot started (browser mode).
+Paper trading: True
+Channel: @high_table_channel
+Position size: 3.0% (1.0% on risky calls)
+Entry mode: MARKET
+2026-05-12 16:49:48,097 [INFO] main: Bot running. Ctrl-C to stop.
+2026-05-12 17:16:38,329 [INFO] main: Launching browser (headless=False)...
+2026-05-12 17:16:38,600 [INFO] main: Navigating to https://web.telegram.org/k/#-1002607815374
+2026-05-12 17:16:38,729 [INFO] main: Waiting for Telegram Web to load — log in with your phone / QR code if prompted...
+2026-05-12 17:16:45,265 [INFO] main: Channel loaded. Installing message observer...
+2026-05-12 17:16:50,479 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:16:50,482 [INFO] main: Bot running. Ctrl-C to stop.
+2026-05-12 17:17:06,398 [INFO] main: Launching browser (headless=False)...
+2026-05-12 17:17:06,661 [INFO] main: Navigating to https://web.telegram.org/k/#-2607815374
+2026-05-12 17:17:06,765 [INFO] main: Waiting for Telegram Web to load — log in with your phone / QR code if prompted...
+2026-05-12 17:17:09,208 [INFO] main: Channel loaded. Installing message observer...
+2026-05-12 17:17:10,356 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:10,357 [INFO] main: Bot running. Ctrl-C to stop.
+2026-05-12 17:17:10,358 [INFO] main: MSG text='MARKET UPDATE FOR THE "HIGH TABLE"\n\nRight now we have many active calls running. Some already hit TP, while others are still moving toward their direction. This is a normal part of the journey.\n\nThe m'
+2026-05-12 17:17:10,361 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:17:10,364 [INFO] main: MSG text='Close it\n4\n175\n\ue949\n00:34'
+2026-05-12 17:17:10,365 [INFO] main: PARSED kind=SignalKind.AMBIGUOUS ticker=None actionable=False notes=['Close message but ticker not explicit']
+2026-05-12 17:17:11,395 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:11,396 [INFO] main: MSG text='Sunday — Entry\nMonday — Volatility\nTuesday — Execution\nWednesday — Trend confirmation\nThursday — Expansion / breakout\nFriday — Profit taking\nSaturday — Fake moves / low liquidity traps\n10\n8\n179\n\ue949\n03:2'
+2026-05-12 17:17:11,397 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:17:11,402 [INFO] main: MSG text='should run\n3\n174\n\ue949\n04:31'
+2026-05-12 17:17:11,402 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:17:11,406 [INFO] main: MSG text='$BARD \n\nEntry - CMP\n\nTP - 0.295 - 0.31 -0.327\n\nSL - 0.27\n2\n1\n172\n\ue949\n15:23'
+2026-05-12 17:17:11,407 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BARD actionable=True notes=[]
+2026-05-12 17:17:12,130 [INFO] binance_client: [PAPER] BUY 106.7 BARDUSDT @ ~0.281
+2026-05-12 17:17:12,130 [INFO] binance_client: [PAPER] OCO SELL 106.7 BARDUSDT TP=0.295 SL=0.27
+2026-05-12 17:17:13,200 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:13,202 [INFO] main: MSG text='$OPG \n\nENTRY - CMP -0.29\n\nTP -0.365 -0.46 -0.0523 - 0.061\n\nSL - 0.24\n4\n175\n\ue949\n15:31'
+2026-05-12 17:17:13,202 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=OPG actionable=True notes=[]
+2026-05-12 17:17:14,590 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:14,592 [INFO] main: MSG text='$PHA \n\nENTRY - CMP\n\nTP -0.42 -0.46\n\nSL-0.3440\n2\n1\n174\n\ue949\n16:25'
+2026-05-12 17:17:14,592 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=PHA actionable=True notes=[]
+2026-05-12 17:17:14,919 [INFO] binance_client: [PAPER] BUY 757.0 PHAUSDT @ ~0.0384
+2026-05-12 17:17:15,938 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:15,948 [INFO] main: MSG text='$ATH - 20%\n1\n170\n\ue949\n22:26'
+2026-05-12 17:17:15,948 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:17:15,951 [INFO] main: MSG text='$BAT \n\nIf support holds we will entry\n3\n2\n1\n180\n\ue949\n00:08'
+2026-05-12 17:17:15,951 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:17:15,954 [INFO] main: MSG text='$RAVE \n\nScalping\n2\n181\n\ue949\n03:33'
+2026-05-12 17:17:15,954 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:17:15,957 [INFO] main: MSG text='First Target \n5\n3\n2\n176\n\ue949\n05:31'
+2026-05-12 17:17:15,957 [INFO] main: PARSED kind=SignalKind.TP_HIT_INFO ticker=None actionable=False notes=[]
+2026-05-12 17:17:16,994 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:16,996 [INFO] main: MSG text='$BB \n\nCould make a good move within few days !! \n\nEntry - 0.034 \n\nTarget - 0.04 - 0.042++\n\nStoploss - 0.027\n1\n174\n\ue949\n16:38'
+2026-05-12 17:17:16,996 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BB actionable=True notes=[]
+2026-05-12 17:17:17,513 [INFO] binance_client: [PAPER] BUY 863.2 BBUSDT @ ~0.0327
+2026-05-12 17:17:17,513 [INFO] binance_client: [PAPER] OCO SELL 863.2 BBUSDT TP=0.04 SL=0.027
+2026-05-12 17:17:18,549 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:18,550 [INFO] main: MSG text='$MITO \n\nEverything mentioned in the chart\n3\n1\n175\n\ue949\n17:14'
+2026-05-12 17:17:18,550 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:17:18,556 [INFO] main: MSG text='$DUSK \n\nWe will take 2 entry\n2\n170\n\ue949\n17:14'
+2026-05-12 17:17:18,556 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:17:18,559 [INFO] main: MSG text='$PIEVERSE \n\nEntry-CMP\n\nTP-  1.07  - 1.74\n\nSL- 0.5915\n169\n\ue949\n17:14'
+2026-05-12 17:17:18,559 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=PIEVERSE actionable=True notes=[]
+2026-05-12 17:17:19,834 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:19,836 [INFO] main: MSG text='$TURBO \n\nEntry - CMP\n\nTP - 0.00146 - 0.0017 -0.00196\n\nSL-0.0011690\n1\n175\n\ue949\n17:42'
+2026-05-12 17:17:19,836 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=TURBO actionable=True notes=[]
+2026-05-12 17:17:20,378 [INFO] binance_client: [PAPER] BUY 20727.0 TURBOUSDT @ ~0.001321
+2026-05-12 17:17:20,378 [INFO] binance_client: [PAPER] OCO SELL 20727.0 TURBOUSDT TP=0.00146 SL=0.001169
+2026-05-12 17:17:21,458 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:21,460 [INFO] main: MSG text='$BAT \n\nENTRY - CMP\n\nTP - 0.127 - 0.139\n\nSL-0.10\n1\n180\n\ue949\n17:45'
+2026-05-12 17:17:21,460 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BAT actionable=True notes=[]
+2026-05-12 17:17:22,087 [INFO] binance_client: [PAPER] BUY 237.0 BATUSDT @ ~0.1116
+2026-05-12 17:17:22,088 [INFO] binance_client: [PAPER] OCO SELL 237.0 BATUSDT TP=0.127 SL=0.1
+2026-05-12 17:17:23,203 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:17:23,204 [INFO] main: MSG text='$INX\n\nScalping\n185\n\ue949\n18:49'
+2026-05-12 17:17:23,204 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:17:23,208 [INFO] main: MSG text='$GRASS \n\nENTRY ~ CMP \n\nTP ~ 0.41 -0.46\n\nSL ~0.3528\n190\n\ue949\n10:24'
+2026-05-12 17:17:23,209 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=GRASS actionable=True notes=[]
+2026-05-12 17:17:24,712 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:16,820 [INFO] main: Launching browser (headless=False)...
+2026-05-12 17:21:17,083 [INFO] main: Navigating to https://web.telegram.org/k/#-2607815374
+2026-05-12 17:21:17,167 [INFO] main: Waiting for Telegram Web to load — log in with your phone / QR code if prompted...
+2026-05-12 17:21:19,592 [INFO] main: Channel loaded. Installing message observer...
+2026-05-12 17:21:20,724 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:20,725 [INFO] main: Bot running. Ctrl-C to stop.
+2026-05-12 17:21:20,725 [INFO] main: MSG text='MARKET UPDATE FOR THE "HIGH TABLE"\n\nRight now we have many active calls running. Some already hit TP, while others are still moving toward their direction. This is a normal part of the journey.\n\nThe m'
+2026-05-12 17:21:20,726 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:20,730 [INFO] main: MSG text='Close it\n4\n175\n\ue949\n00:34'
+2026-05-12 17:21:20,731 [INFO] main: PARSED kind=SignalKind.AMBIGUOUS ticker=None actionable=False notes=['Close message but ticker not explicit']
+2026-05-12 17:21:21,790 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:21,792 [INFO] main: MSG text='Sunday — Entry\nMonday — Volatility\nTuesday — Execution\nWednesday — Trend confirmation\nThursday — Expansion / breakout\nFriday — Profit taking\nSaturday — Fake moves / low liquidity traps\n10\n8\n179\n\ue949\n03:2'
+2026-05-12 17:21:21,792 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:21,797 [INFO] main: MSG text='should run\n3\n174\n\ue949\n04:31'
+2026-05-12 17:21:21,797 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:21,800 [INFO] main: MSG text='$BARD \n\nEntry - CMP\n\nTP - 0.295 - 0.31 -0.327\n\nSL - 0.27\n2\n1\n172\n\ue949\n15:23'
+2026-05-12 17:21:21,801 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BARD actionable=True notes=[]
+2026-05-12 17:21:22,137 [INFO] binance_client: [PAPER] BUY 106.7 BARDUSDT @ ~0.281
+2026-05-12 17:21:22,137 [INFO] binance_client: [PAPER] OCO SELL 106.7 BARDUSDT TP=0.295 SL=0.27
+2026-05-12 17:21:23,183 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:23,185 [INFO] main: MSG text='$OPG \n\nENTRY - CMP -0.29\n\nTP -0.365 -0.46 -0.0523 - 0.061\n\nSL - 0.24\n4\n175\n\ue949\n15:31'
+2026-05-12 17:21:23,185 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=OPG actionable=True notes=[]
+2026-05-12 17:21:24,637 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:24,638 [INFO] main: MSG text='$PHA \n\nENTRY - CMP\n\nTP -0.42 -0.46\n\nSL-0.3440\n2\n1\n174\n\ue949\n16:25'
+2026-05-12 17:21:24,639 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=PHA actionable=True notes=[]
+2026-05-12 17:21:24,964 [INFO] binance_client: [PAPER] BUY 757.0 PHAUSDT @ ~0.0384
+2026-05-12 17:21:26,025 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:26,034 [INFO] main: MSG text='$ATH - 20%\n1\n170\n\ue949\n22:26'
+2026-05-12 17:21:26,035 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:26,039 [INFO] main: MSG text='$BAT \n\nIf support holds we will entry\n3\n2\n1\n180\n\ue949\n00:08'
+2026-05-12 17:21:26,040 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:26,043 [INFO] main: MSG text='$RAVE \n\nScalping\n2\n181\n\ue949\n03:33'
+2026-05-12 17:21:26,043 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:26,047 [INFO] main: MSG text='First Target \n5\n3\n2\n176\n\ue949\n05:31'
+2026-05-12 17:21:26,047 [INFO] main: PARSED kind=SignalKind.TP_HIT_INFO ticker=None actionable=False notes=[]
+2026-05-12 17:21:27,101 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:27,102 [INFO] main: MSG text='$BB \n\nCould make a good move within few days !! \n\nEntry - 0.034 \n\nTarget - 0.04 - 0.042++\n\nStoploss - 0.027\n1\n174\n\ue949\n16:38'
+2026-05-12 17:21:27,103 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BB actionable=True notes=[]
+2026-05-12 17:21:28,038 [INFO] binance_client: [PAPER] BUY 863.2 BBUSDT @ ~0.0327
+2026-05-12 17:21:28,038 [INFO] binance_client: [PAPER] OCO SELL 863.2 BBUSDT TP=0.04 SL=0.027
+2026-05-12 17:21:29,074 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:29,076 [INFO] main: MSG text='$MITO \n\nEverything mentioned in the chart\n3\n1\n175\n\ue949\n17:14'
+2026-05-12 17:21:29,076 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:29,080 [INFO] main: MSG text='$DUSK \n\nWe will take 2 entry\n2\n170\n\ue949\n17:14'
+2026-05-12 17:21:29,080 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:29,083 [INFO] main: MSG text='$PIEVERSE \n\nEntry-CMP\n\nTP-  1.07  - 1.74\n\nSL- 0.5915\n169\n\ue949\n17:14'
+2026-05-12 17:21:29,084 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=PIEVERSE actionable=True notes=[]
+2026-05-12 17:21:30,471 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:30,473 [INFO] main: MSG text='$TURBO \n\nEntry - CMP\n\nTP - 0.00146 - 0.0017 -0.00196\n\nSL-0.0011690\n1\n175\n\ue949\n17:42'
+2026-05-12 17:21:30,473 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=TURBO actionable=True notes=[]
+2026-05-12 17:21:30,800 [INFO] binance_client: [PAPER] BUY 20727.0 TURBOUSDT @ ~0.001321
+2026-05-12 17:21:30,800 [INFO] binance_client: [PAPER] OCO SELL 20727.0 TURBOUSDT TP=0.00146 SL=0.001169
+2026-05-12 17:21:31,850 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:31,852 [INFO] main: MSG text='$BAT \n\nENTRY - CMP\n\nTP - 0.127 - 0.139\n\nSL-0.10\n1\n180\n\ue949\n17:45'
+2026-05-12 17:21:31,852 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BAT actionable=True notes=[]
+2026-05-12 17:21:32,357 [INFO] binance_client: [PAPER] BUY 237.0 BATUSDT @ ~0.1116
+2026-05-12 17:21:32,357 [INFO] binance_client: [PAPER] OCO SELL 237.0 BATUSDT TP=0.127 SL=0.1
+2026-05-12 17:21:33,386 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:33,388 [INFO] main: MSG text='$INX\n\nScalping\n185\n\ue949\n18:49'
+2026-05-12 17:21:33,388 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:33,393 [INFO] main: MSG text='$GRASS \n\nENTRY ~ CMP \n\nTP ~ 0.41 -0.46\n\nSL ~0.3528\n190\n\ue949\n10:24'
+2026-05-12 17:21:33,393 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=GRASS actionable=True notes=[]
+2026-05-12 17:21:34,589 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:34,591 [INFO] main: MSG text='$BIO \n\nEntry ~ 0.051\n\nTP ~0.057 - 0.060 - 0.063\n\nSL ~0.048\n2\n190\n\ue949\n10:16'
+2026-05-12 17:21:34,591 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BIO actionable=True notes=[]
+2026-05-12 17:21:35,154 [INFO] binance_client: [PAPER] BUY 539.0 BIOUSDT @ ~0.0478
+2026-05-12 17:21:36,197 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:36,206 [INFO] main: MSG text='$ARKM \n\nENTRY ~CMP \n\nTP~ 0.1650 -0.1750-0.1950\n\nSL ~ 0.1244\n3\n188\n\ue949\n10:04'
+2026-05-12 17:21:36,206 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=ARKM actionable=True notes=[]
+2026-05-12 17:21:36,722 [INFO] binance_client: [PAPER] BUY 180.2 ARKMUSDT @ ~0.1387
+2026-05-12 17:21:36,722 [INFO] binance_client: [PAPER] OCO SELL 180.2 ARKMUSDT TP=0.165 SL=0.1244
+2026-05-12 17:21:37,749 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:37,750 [INFO] main: MSG text='First Target\n5\n203\n\ue949\n06:31'
+2026-05-12 17:21:37,750 [INFO] main: PARSED kind=SignalKind.TP_HIT_INFO ticker=None actionable=False notes=[]
+2026-05-12 17:21:38,800 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:38,802 [INFO] main: MSG text='$ENA \n\nEntry - CMP - 0.12 \n\nTarget - 0.15 - 0.17 - 0.19 ++ \n\nStoploss - 0.11\n1\n212\n\ue949\n06:28'
+2026-05-12 17:21:38,803 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=ENA actionable=True notes=[]
+2026-05-12 17:21:39,386 [INFO] binance_client: [PAPER] BUY 188.52 ENAUSDT @ ~0.1286
+2026-05-12 17:21:39,386 [INFO] binance_client: [PAPER] OCO SELL 188.52 ENAUSDT TP=0.15 SL=0.11
+2026-05-12 17:21:40,424 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:40,426 [INFO] main: MSG text='$GUA looks ready for a 10x - 15x move.\n(SPOT) \n→ 90% supply controlled by top 10 holders\n→ Low float = easy price manipulation\n→ One strong push and this can send hard\n\nMy DCA zones:\n• $0.97\n• $0.74\n•'
+2026-05-12 17:21:40,426 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:40,432 [INFO] main: MSG text='$SPORTFUN (Only 13m market cap)'
+2026-05-12 17:21:40,432 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:40,435 [INFO] main: MSG text='$SPORTFUN (Only 13m market cap)\n3\n1\n213\n\ue949\n00:51'
+2026-05-12 17:21:40,436 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:40,439 [INFO] main: MSG text='$BTC SHORT (Might hunting liquidity)\n3\n211\n\ue949\n00:27'
+2026-05-12 17:21:40,439 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:40,442 [INFO] main: MSG text='$BILL\n211\n\ue949\n00:12'
+2026-05-12 17:21:40,443 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:40,445 [INFO] main: MSG text='$ETC \n\nEntry - CMP - 9$ \n\nTarget - 10.5 - 11.5 - 12++\n\nStoploss - 8.5\n192\n\ue949\n15:44'
+2026-05-12 17:21:40,446 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=ETC actionable=True notes=[]
+2026-05-12 17:21:41,172 [INFO] binance_client: [PAPER] BUY 2.44 ETCUSDT @ ~9.61
+2026-05-12 17:21:41,172 [INFO] binance_client: [PAPER] OCO SELL 2.44 ETCUSDT TP=10.5 SL=8.5
+2026-05-12 17:21:42,298 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:42,300 [INFO] main: MSG text='$NEAR \n\nEntry - CMP - DCA before SL \n\nTarget - 1.871 - 2.5 - 3.1 ++\n\nStoploss - 1.223\n197\n\ue949\n15:45'
+2026-05-12 17:21:42,300 [INFO] main: PARSED kind=SignalKind.AMBIGUOUS ticker=NEAR actionable=False notes=['Could not extract TP or SL numbers']
+2026-05-12 17:21:43,333 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:43,334 [INFO] main: MSG text='$ENJ \n\nEntry - 0.05 - CMP \n\nTarget - 0.055 - 0.06 - 0.065++\n\nStoploss - 0.04712\n194\n\ue949\n15:47'
+2026-05-12 17:21:43,334 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=ENJ actionable=True notes=[]
+2026-05-12 17:21:43,867 [INFO] binance_client: [PAPER] BUY 466.0 ENJUSDT @ ~0.04895
+2026-05-12 17:21:43,867 [INFO] binance_client: [PAPER] OCO SELL 466.0 ENJUSDT TP=0.055 SL=0.04712
+2026-05-12 17:21:45,061 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:45,063 [INFO] main: MSG text='$ZRX \n\nEntry - CMP - 0.1100 \n\nTarget - 0.14 - 0.16 ++\n\nStoploss - 0.1052\n207\n\ue949\n15:48'
+2026-05-12 17:21:45,063 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=ZRX actionable=True notes=[]
+2026-05-12 17:21:45,470 [INFO] binance_client: [PAPER] BUY 177.0 ZRXUSDT @ ~0.1246
+2026-05-12 17:21:45,471 [INFO] binance_client: [PAPER] OCO SELL 177.0 ZRXUSDT TP=0.14 SL=0.1052
+2026-05-12 17:21:46,500 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:46,502 [INFO] main: MSG text='$ICP \n\nEntry - CMP - 3$ \n\nTarget - 3.5 - 4 - 4.5 \n\nStoploss - 2.124\n3\n996\n\ue949\n15:49'
+2026-05-12 17:21:46,502 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=ICP actionable=True notes=[]
+2026-05-12 17:21:47,266 [INFO] binance_client: [PAPER] BUY 6.47 ICPUSDT @ ~3.317
+2026-05-12 17:21:47,266 [INFO] binance_client: [PAPER] OCO SELL 6.47 ICPUSDT TP=3.5 SL=2.124
+2026-05-12 17:21:48,301 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:48,303 [INFO] main: MSG text='close $ENJ\n2\n205\n\ue949\n18:03'
+2026-05-12 17:21:48,303 [INFO] main: PARSED kind=SignalKind.CLOSE ticker=ENJ actionable=True notes=[]
+2026-05-12 17:21:49,710 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:49,711 [INFO] main: MSG text='As I said - High Risk factor !! Which is why I would recommend earlier either to close or continue\n4\n203\n\ue949\n18:05'
+2026-05-12 17:21:49,711 [INFO] main: PARSED kind=SignalKind.AMBIGUOUS ticker=None actionable=False notes=['Close message but ticker not explicit']
+2026-05-12 17:21:50,813 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 17:21:50,815 [INFO] main: MSG text='$BILL   (Risky one,use little amount)\n197\n\ue949\n23:33'
+2026-05-12 17:21:50,815 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:50,820 [INFO] main: MSG text='$STRK  (Risky one,use little amount)\n212\n\ue949\n23:47'
+2026-05-12 17:21:50,820 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 17:21:50,824 [INFO] main: MSG text='$PYTH \n\nEntry - CMP - 0.0520 \n\nTarget - 0.06 - 0.065 - 0.0727++\n\nStoploss - 0.0472\n200\n\ue949\n15:42'
+2026-05-12 17:21:50,825 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=PYTH actionable=True notes=[]
+2026-05-12 17:21:51,362 [INFO] binance_client: [PAPER] BUY 377.9 PYTHUSDT @ ~0.0569
+2026-05-12 17:21:51,363 [INFO] binance_client: [PAPER] OCO SELL 377.9 PYTHUSDT TP=0.06 SL=0.0472
+2026-05-12 18:08:53,752 [INFO] main: Date filter active: ignoring messages dated before 2026-05-12T00:00:00+00:00
+2026-05-12 18:08:54,032 [INFO] main: Launching browser (headless=False)...
+2026-05-12 18:08:54,295 [INFO] main: Navigating to https://web.telegram.org/k/#-2607815374
+2026-05-12 18:08:55,167 [INFO] main: Waiting for Telegram Web to load - log in if prompted...
+2026-05-12 18:08:57,588 [INFO] main: Scrolling channel to latest message...
+2026-05-12 18:08:59,605 [INFO] main: Installing message observer...
+2026-05-12 18:08:59,609 [INFO] main: Observer installed: max MID at install = 4294968642, ignoring everything <= that
+2026-05-12 18:09:00,712 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:09:00,713 [INFO] main: Bot running. Ctrl-C to stop.
+2026-05-12 18:10:07,451 [INFO] main: Date filter active: ignoring messages dated before 2026-05-12T00:00:00+00:00
+2026-05-12 18:10:07,720 [INFO] main: Launching browser (headless=False)...
+2026-05-12 18:10:07,980 [INFO] main: Navigating to https://web.telegram.org/k/#-2607815374
+2026-05-12 18:10:08,085 [INFO] main: Waiting for Telegram Web to load - log in if prompted...
+2026-05-12 18:10:10,555 [INFO] main: Scrolling channel to latest message...
+2026-05-12 18:10:12,583 [INFO] main: Installing message observer...
+2026-05-12 18:10:12,590 [INFO] main: Observer installed: max MID at install = 4294968642, ignoring everything <= that
+2026-05-12 18:10:13,783 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:10:13,785 [INFO] main: Bot running. Ctrl-C to stop.
+2026-05-12 18:17:22,171 [INFO] main: Date filter active: ignoring messages dated before 2026-05-12T00:00:00+00:00
+2026-05-12 18:17:22,449 [INFO] main: Launching browser (headless=False)...
+2026-05-12 18:17:22,731 [INFO] main: Navigating to https://web.telegram.org/k/#-2607815374
+2026-05-12 18:17:22,823 [INFO] main: Waiting for Telegram Web to load - log in if prompted...
+2026-05-12 18:17:25,268 [INFO] main: Scrolling channel to latest message...
+2026-05-12 18:17:27,283 [INFO] main: Installing message observer...
+2026-05-12 18:17:27,286 [INFO] main: Observer installed: max MID at install = 1236, ignoring everything <= that
+2026-05-12 18:17:28,387 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:28,389 [INFO] main: Bot running. Ctrl-C to stop.
+2026-05-12 18:17:32,010 [INFO] main: MSG text='47% currently\n2\n1\n114\n\ue949\n16:24'
+2026-05-12 18:17:32,010 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 18:17:32,018 [INFO] main: Frame navigated - scheduling reinstall
+2026-05-12 18:17:38,155 [INFO] main: MSG text='$GRASS: no Binance spot pair found in allowed quotes (USDT). Skipping.\n17:17'
+2026-05-12 18:17:38,156 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 18:17:38,164 [INFO] main: MSG text='Bot started (browser mode).\nPaper trading: True\nChannel: -2607815374\nPosition size: 3.0% (1.0% on risky calls)\nEntry mode: MARKET\n17:21'
+2026-05-12 18:17:38,164 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 18:17:38,170 [INFO] main: MSG text='AMBIGUOUS message - manual review needed\nNotes: Close message but ticker not explicit\n\nText: Close it\n4\n175\n\ue949\n00:34\n17:21'
+2026-05-12 18:17:38,170 [INFO] main: PARSED kind=SignalKind.AMBIGUOUS ticker=None actionable=False notes=['Close message but ticker not explicit']
+2026-05-12 18:17:38,218 [INFO] main: Frame navigated - scheduling reinstall
+2026-05-12 18:17:39,194 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:39,196 [INFO] main: MSG text='[PAPER] OPENED $BARD\nEntry: 0.281 (MARKET)\nQty: 106.7\nTP: 0.295  SL: 0.27\nSize: 30.00 USDT (3.0% of free balance)\n17:21'
+2026-05-12 18:17:39,196 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BARD actionable=True notes=[]
+2026-05-12 18:17:40,258 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:40,260 [INFO] main: MSG text='$OPG: no Binance spot pair found in allowed quotes (USDT). Skipping.\n17:21'
+2026-05-12 18:17:40,260 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 18:17:40,264 [INFO] main: MSG text='$PHA: SL (0.344) >= entry (0.0384). Position open without SL - close manually.\n17:21'
+2026-05-12 18:17:40,264 [INFO] main: PARSED kind=SignalKind.CLOSE ticker=PHA actionable=True notes=[]
+2026-05-12 18:17:41,280 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:41,282 [INFO] main: MSG text='Channel reports TP hit - our OCO should be handling this automatically.\n17:21'
+2026-05-12 18:17:41,282 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 18:17:41,287 [INFO] main: MSG text='[PAPER] OPENED $BB\nEntry: 0.0327 (MARKET)\nQty: 863.2\nTP: 0.04  SL: 0.027\nSize: 28.23 USDT (3.0% of free balance)\n17:21'
+2026-05-12 18:17:41,287 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BB actionable=True notes=[]
+2026-05-12 18:17:42,376 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:42,378 [INFO] main: MSG text='$PIEVERSE: no Binance spot pair found in allowed quotes (USDT). Skipping.\n17:21'
+2026-05-12 18:17:42,378 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 18:17:42,381 [INFO] main: MSG text='[PAPER] OPENED $TURBO\nEntry: 0.001321 (MARKET)\nQty: 20727.0\nTP: 0.00146  SL: 0.001169\nSize: 27.38 USDT (3.0% of free balance)\n17:21'
+2026-05-12 18:17:42,382 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=TURBO actionable=True notes=[]
+2026-05-12 18:17:43,538 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:43,540 [INFO] main: MSG text='[PAPER] OPENED $BAT\nEntry: 0.1116 (MARKET)\nQty: 237.0\nTP: 0.127  SL: 0.1\nSize: 26.56 USDT (3.0% of free balance)\n17:21'
+2026-05-12 18:17:43,540 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=BAT actionable=True notes=[]
+2026-05-12 18:17:44,580 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:44,582 [INFO] main: MSG text='$GRASS: no Binance spot pair found in allowed quotes (USDT). Skipping.\n17:21'
+2026-05-12 18:17:44,582 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 18:17:44,587 [INFO] main: MSG text='$BIO: SL (0.048) >= entry (0.0478). Position open without SL - close manually.\n17:21'
+2026-05-12 18:17:44,587 [INFO] main: PARSED kind=SignalKind.CLOSE ticker=BIO actionable=True notes=[]
+2026-05-12 18:17:45,623 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:45,625 [INFO] main: MSG text='[PAPER] OPENED $ARKM\nEntry: 0.1387 (MARKET)\nQty: 180.2\nTP: 0.165  SL: 0.1244\nSize: 24.99 USDT (3.0% of free balance)\n17:21'
+2026-05-12 18:17:45,625 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=ARKM actionable=True notes=[]
+2026-05-12 18:17:46,669 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:46,670 [INFO] main: MSG text='Channel reports TP hit - our OCO should be handling this automatically.\n17:21'
+2026-05-12 18:17:46,670 [INFO] main: PARSED kind=SignalKind.IGNORE ticker=None actionable=False notes=[]
+2026-05-12 18:17:46,674 [INFO] main: MSG text='[PAPER] OPENED $ENA\nEntry: 0.1286 (MARKET)\nQty: 188.52\nTP: 0.15  SL: 0.11\nSize: 24.24 USDT (3.0% of free balance)\n17:21'
+2026-05-12 18:17:46,675 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=ENA actionable=True notes=[]
+2026-05-12 18:17:47,708 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 18:17:47,709 [INFO] main: MSG text='[PAPER] OPENED $ETC\nEntry: 9.61 (MARKET)\nQty: 2.44\nTP: 10.5  SL: 8.5\nSize: 23.52 USDT (3.0% of free balance)\n17:21'
+2026-05-12 18:17:47,710 [INFO] main: PARSED kind=SignalKind.ENTRY ticker=ETC actionable=True notes=[]
+2026-05-12 18:17:58,020 [WARNING] notifier: Notification failed: 
+2026-05-12 18:17:58,021 [INFO] main: MSG text='AMBIGUOUS message - manual review needed\nNotes: Could not extract TP or SL numbers\n\nText: $NEAR \n\nEntry - CMP - DCA before SL \n\nTarget - 1.871 - 2.5 - 3.1 ++\n\nStoploss - 1.223\n197\n\ue949\n15:45\n17:21'
+2026-05-12 18:17:58,022 [INFO] main: PARSED kind=SignalKind.AMBIGUOUS ticker=NEAR actionable=False notes=['Could not extract TP or SL numbers']
+2026-05-12 19:02:39,974 [ERROR] main: Invalid configuration:
+2026-05-12 19:02:39,974 [ERROR] main:   - Missing TELEGRAM_API_ID / TELEGRAM_API_HASH (get from my.telegram.org)
+2026-05-12 19:02:46,300 [INFO] main: Date filter active: 2026-05-12T00:00:00+00:00
+2026-05-12 19:02:46,583 [INFO] main: Launching browser (headless=False)...
+2026-05-12 19:02:46,843 [INFO] main: Navigating to https://web.telegram.org/k/#-2607815374
+2026-05-12 19:02:49,393 [INFO] main: Scrolling channel to latest message...
+2026-05-12 19:02:51,407 [INFO] main: Installing message observer...
+2026-05-12 19:02:51,410 [INFO] main: Observer installed: max MID = 4294968642
+2026-05-12 19:02:52,578 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 19:02:52,580 [INFO] main: Bot running. Browser stays alive until something closes it; then we auto-restart.
+2026-05-12 19:02:59,482 [WARNING] main: Page closed - run_bot will return for restart
+2026-05-12 19:02:59,515 [WARNING] main: Browser context closed - run_bot will return for restart
+2026-05-12 19:02:59,676 [WARNING] main: Bot run ended (page closed). Restarting in 5s.
+2026-05-12 19:03:00,751 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 19:03:05,766 [INFO] main: Date filter active: 2026-05-12T00:00:00+00:00
+2026-05-12 19:03:06,038 [INFO] main: Launching browser (headless=False)...
+2026-05-12 19:03:06,308 [INFO] main: Navigating to https://web.telegram.org/k/#-2607815374
+2026-05-12 19:03:08,845 [INFO] main: Scrolling channel to latest message...
+2026-05-12 19:03:10,863 [INFO] main: Installing message observer...
+2026-05-12 19:03:10,866 [INFO] main: Observer installed: max MID = 4294968642
+2026-05-12 19:03:11,883 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 19:03:11,884 [INFO] main: Bot running. Browser stays alive until something closes it; then we auto-restart.
+2026-05-12 19:03:21,713 [WARNING] main: Page closed - run_bot will return for restart
+2026-05-12 19:03:21,856 [WARNING] main: Browser context closed - run_bot will return for restart
+2026-05-12 19:06:29,195 [INFO] main: Date filter active: 2026-05-12T00:00:00+00:00
+2026-05-12 19:06:29,473 [INFO] main: Launching browser (headless=False)...
+2026-05-12 19:06:29,757 [INFO] main: Navigating to https://web.telegram.org/k/#-2607815374
+2026-05-12 19:06:32,014 [WARNING] main: Page closed - run_bot will return for restart
+2026-05-12 19:06:32,048 [WARNING] main: Browser context closed - run_bot will return for restart
+2026-05-12 19:06:32,280 [INFO] main: Scrolling channel to latest message...
+2026-05-12 19:06:32,282 [WARNING] main: scroll-to-latest failed: Page.evaluate: Target page, context or browser has been closed

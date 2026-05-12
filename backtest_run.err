@@ -1,0 +1,9 @@
+2026-05-12 19:17:04,178 [INFO] Backtest config: size=6.00 USDT, max_concurrent=10, quotes=['USDT']
+2026-05-12 19:17:04,186 [INFO] Loaded 24 ENTRY signals (of 63 total messages)
+2026-05-12 19:17:05,270 [INFO] [1/24] FORM FORMUSDT entry=0.295100 exit=0.293500 outcome=TIMEOUT pnl=-0.0325 USDT
+2026-05-12 19:17:06,006 [INFO] [2/24] SKIP ZORA: no spot pair on Binance in ['USDT']
+2026-05-12 19:17:07,177 [INFO] [3/24] SKIP ATH: no spot pair on Binance in ['USDT']
+2026-05-12 19:17:07,890 [INFO] [4/24] SKIP CHILLGUY: no spot pair on Binance in ['USDT']
+2026-05-12 19:17:09,501 [INFO] [5/24] PENGU PENGUUSDT entry=0.010333 exit=0.010000 outcome=SL pnl=-0.1934 USDT
+2026-05-12 19:17:10,781 [INFO] [6/24] SKIP TON: invalid TP/SL vs entry
+2026-05-12 19:17:12,274 [INFO] [7/24] AXS AXSUSDT entry=1.393000 exit=1.388000 outcome=TIMEOUT pnl=-0.0215 USDT

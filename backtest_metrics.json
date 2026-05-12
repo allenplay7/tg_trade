@@ -1,0 +1,26 @@
+{
+  "total_trades": 13,
+  "wins": 4,
+  "losses": 9,
+  "flat": 0,
+  "win_rate_pct": 30.76923076923077,
+  "gross_profit_usdt": 2.200115069739441,
+  "gross_loss_usdt": 1.750420684354383,
+  "profit_factor": 1.256906462203354,
+  "net_pnl_usdt": 0.4496943853850578,
+  "max_drawdown_pct": -1.5346474467442222,
+  "max_drawdown_usdt": -1.5655747226557963,
+  "sharpe_annualized": 1.9620438617498204,
+  "avg_win_usdt": 0.5500287674348603,
+  "avg_loss_usdt": -0.194491187150487,
+  "avg_duration_hours": 70.90384615384616,
+  "by_outcome": {
+    "TIMEOUT": 8,
+    "TP": 3,
+    "SL": 2
+  },
+  "position_size_usdt": 6.0,
+  "max_concurrent": 10,
+  "init_cash": 100.0,
+  "lookback_days": 30
+}
