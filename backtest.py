@@ -33,7 +33,8 @@ Outputs:
   backtest_metrics.json         Aggregate metrics per strategy + comparison
 """
 from __future__ import annotations
-
+import os
+import ccxt
 import json
 import logging
 import math
@@ -62,7 +63,7 @@ SYMBOL_CACHE_PATH = PROJECT_ROOT / "symbol_cache.json"
 MAX_HOLD_DAYS = 14
 INIT_CASH = 100.0
 BINANCE_TIMEOUT_S = 10
-
+PRIORITY_EXCHANGES = ['kraken', 'okx', 'bybit', 'gateio', 'kucoin', 'mexc', 'bitget']
 
 # ----------------------------------------------------------------------------
 # Strategy definitions
@@ -196,30 +197,87 @@ def fetch_binance_klines(client: Client, symbol: str,
     except Exception:
         pass
     return df
+def fetch_ccxt_ohlcv(exchange_id: str, ticker: str, start_dt: datetime, end_dt: datetime) -> pd.DataFrame:
+    """Standardized OHLCV fetcher using CCXT."""
+    try:
+        # Initialize exchange
+        ex_class = getattr(ccxt, exchange_id)
+        ex = ex_class({'enableRateLimit': True})
+        symbol = f"{ticker.upper()}/USDT"
+        
+        # Load markets to check availability
+        markets = ex.load_markets()
+        if symbol not in markets:
+            return pd.DataFrame()
 
+        since = int(start_dt.timestamp() * 1000)
+        all_ohlcv = []
+        
+        # Pagination loop
+        while since < int(end_dt.timestamp() * 1000):
+            ohlcv = ex.fetch_ohlcv(symbol, timeframe='1h', since=since, limit=1000)
+            if not ohlcv:
+                break
+            all_ohlcv.extend(ohlcv)
+            since = ohlcv[-1][0] + 1 
+            if len(ohlcv) < 1000:
+                break
+            time.sleep(ex.rateLimit / 1000)
+
+        if not all_ohlcv:
+            return pd.DataFrame()
+
+        df = pd.DataFrame(all_ohlcv, columns=['open_time', 'open', 'high', 'low', 'close', 'volume'])
+        df['open_time'] = pd.to_datetime(df['open_time'], unit='ms', utc=True)
+        # Filter to requested range
+        df = df[(df['open_time'] >= start_dt) & (df['open_time'] <= end_dt)]
+        return df[['open_time', 'open', 'high', 'low', 'close']]
+    except Exception as e:
+        return pd.DataFrame()
+
+def find_on_any_exchange(ticker: str, start: datetime, end: datetime) -> tuple[Optional[str], pd.DataFrame]:
+    """Scans priority list, then all exchanges available in CCXT."""
+    all_exchanges = PRIORITY_EXCHANGES + [id for id in ccxt.exchanges if id not in PRIORITY_EXCHANGES]
+    
+    for ex_id in all_exchanges:
+        if ex_id == 'binance': continue  # Already tried in primary step
+        
+        df = fetch_ccxt_ohlcv(ex_id, ticker, start, end)
+        if not df.empty:
+            return f"ccxt:{ex_id}", df
+    return None, pd.DataFrame()
 
 def get_klines(b_client: Client, cg_client: CoinGeckoClient,
                 ticker: str, quotes: list[str],
                 symbol_cache: dict,
                 start: datetime, end: datetime) -> tuple[Optional[str], pd.DataFrame, str]:
-    """Try Binance spot first, fall back to CoinGecko.
-
-    Returns: (symbol_label, dataframe, source) where source is 'binance', 'coingecko', or 'none'.
     """
+    Hierarchy: 
+    1. Binance Spot (15m)
+    2. CoinGecko (Hourly Approximation)
+    3. Global CCXT Scan (Hourly)
+    """
+    # 1. Binance (Primary)
     sym = resolve_binance_symbol(b_client, ticker, quotes, symbol_cache)
     if sym:
         df = fetch_binance_klines(b_client, sym, start, end)
         if not df.empty:
             return sym, df, "binance"
-    # Fallback: CoinGecko
+
+    # 2. CoinGecko (Fallback)
     coin_id = cg_client.find_id(ticker)
     if coin_id:
-        df = cg_client.fetch_klines(coin_id, int(start.timestamp()),
-                                     int(end.timestamp()))
+        df = cg_client.fetch_klines(coin_id, int(start.timestamp()), int(end.timestamp()))
         if not df.empty:
             return f"CG:{coin_id}", df, "coingecko"
-    return None, pd.DataFrame(), "none"
 
+    # 3. Global CCXT Scan (Last Resort)
+    logging.getLogger("backtest").info(f"Scanning global exchanges for {ticker}...")
+    source_label, df = find_on_any_exchange(ticker, start, end)
+    if not df.empty:
+        return source_label, df, "ccxt_global"
+
+    return None, pd.DataFrame(), "none"
 
 # ----------------------------------------------------------------------------
 # Simulator (parameterised by Strategy)
