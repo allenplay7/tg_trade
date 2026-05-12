@@ -40,11 +40,13 @@ import logging
 import math
 import sys
 import time
+import threading
+from tqdm import tqdm
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
-
+import concurrent.futures
 import numpy as np
 import pandas as pd
 from binance.client import Client
@@ -63,7 +65,7 @@ SYMBOL_CACHE_PATH = PROJECT_ROOT / "symbol_cache.json"
 MAX_HOLD_DAYS = 14
 INIT_CASH = 100.0
 BINANCE_TIMEOUT_S = 10
-PRIORITY_EXCHANGES = ['kraken', 'okx', 'bybit', 'gateio', 'kucoin', 'mexc', 'bitget']
+PRIORITY_EXCHANGES = ['mexc', 'okx', 'bybit', 'gateio', 'kucoin', 'kraken', 'bitget']
 
 # ----------------------------------------------------------------------------
 # Strategy definitions
@@ -197,31 +199,49 @@ def fetch_binance_klines(client: Client, symbol: str,
     except Exception:
         pass
     return df
-def fetch_ccxt_ohlcv(exchange_id: str, ticker: str, start_dt: datetime, end_dt: datetime) -> pd.DataFrame:
-    """Standardized OHLCV fetcher using CCXT."""
+def fetch_ccxt_ohlcv(exchange_id: str, ticker: str, start_dt: datetime, end_dt: datetime, symbol: str) -> pd.DataFrame:
+    """Standardized OHLCV fetcher (Fetches ALL history from launch to NOW)."""
+    # 1. Smart Daily Cache
+    # We stamp the cache with today's date so it only downloads the full history once per day
+    safe_symbol = symbol.replace("/", "")
+    today_str = datetime.now(timezone.utc).strftime("%Y%m%d")
+    cache_file = KLINE_CACHE / f"ccxt_{exchange_id}_{safe_symbol}_full_history_{today_str}.parquet"
+    
+    if cache_file.exists():
+        try:
+            return pd.read_parquet(cache_file)
+        except Exception:
+            pass
+
     try:
-        # Initialize exchange
         ex_class = getattr(ccxt, exchange_id)
         ex = ex_class({'enableRateLimit': True})
-        symbol = f"{ticker.upper()}/USDT"
         
-        # Load markets to check availability
         markets = ex.load_markets()
         if symbol not in markets:
             return pd.DataFrame()
 
-        since = int(start_dt.timestamp() * 1000)
+        # 2. Set bounds: Start from beginning of time (0), go until NOW
+        since = 0 
+        end_ms = int(datetime.now(timezone.utc).timestamp() * 1000)
+        
         all_ohlcv = []
         
         # Pagination loop
-        while since < int(end_dt.timestamp() * 1000):
+        while since < end_ms:
             ohlcv = ex.fetch_ohlcv(symbol, timeframe='1h', since=since, limit=1000)
             if not ohlcv:
                 break
+                
             all_ohlcv.extend(ohlcv)
+            
+            # Move the 'since' pointer to the last fetched candle + 1 millisecond
             since = ohlcv[-1][0] + 1 
+            
+            # If the exchange returned less than 1000 candles, we've reached the present
             if len(ohlcv) < 1000:
                 break
+                
             time.sleep(ex.rateLimit / 1000)
 
         if not all_ohlcv:
@@ -229,56 +249,100 @@ def fetch_ccxt_ohlcv(exchange_id: str, ticker: str, start_dt: datetime, end_dt: 
 
         df = pd.DataFrame(all_ohlcv, columns=['open_time', 'open', 'high', 'low', 'close', 'volume'])
         df['open_time'] = pd.to_datetime(df['open_time'], unit='ms', utc=True)
-        # Filter to requested range
-        df = df[(df['open_time'] >= start_dt) & (df['open_time'] <= end_dt)]
-        return df[['open_time', 'open', 'high', 'low', 'close']]
+        
+        # 3. We removed the time filter so it keeps EVERYTHING
+        final_df = df[['open_time', 'open', 'high', 'low', 'close']]
+        
+        # Save to Cache
+        try:
+            final_df.to_parquet(cache_file, index=False)
+        except Exception:
+            pass
+            
+        return final_df
     except Exception as e:
         return pd.DataFrame()
 
-def find_on_any_exchange(ticker: str, start: datetime, end: datetime) -> tuple[Optional[str], pd.DataFrame]:
-    """Scans priority list, then all exchanges available in CCXT."""
-    all_exchanges = PRIORITY_EXCHANGES + [id for id in ccxt.exchanges if id not in PRIORITY_EXCHANGES]
+def check_single_exchange(ex_id: str, ticker: str, start: datetime, end: datetime, quote_assets: list[str], stop_event: threading.Event) -> tuple[Optional[str], pd.DataFrame]:
+    """Helper function to run in a separate thread with a kill switch."""
+    log = logging.getLogger("backtest")
     
-    for ex_id in all_exchanges:
-        if ex_id == 'binance': continue  # Already tried in primary step
+    if ex_id == 'binance': 
+        return None, pd.DataFrame()
         
-        df = fetch_ccxt_ohlcv(ex_id, ticker, start, end)
+    for quote in quote_assets:
+        # THE KILL SWITCH: If another thread succeeded, stop looping immediately
+        if stop_event.is_set():
+            return None, pd.DataFrame()
+
+        symbol = f"{ticker.upper()}/{quote}"
+        log.info(f"   -> [Thread] Searching {ex_id.upper()} for {symbol}...")
+        
+        df = fetch_ccxt_ohlcv(ex_id, ticker, start, end, symbol)
+        
         if not df.empty:
-            return f"ccxt:{ex_id}", df
+            log.info(f"   => [SUCCESS] Found {symbol} data on {ex_id.upper()}!")
+            return f"ccxt:{ex_id}:{symbol}", df
+            
+    return None, pd.DataFrame()
+
+def find_on_any_exchange(ticker: str, start: datetime, end: datetime, quote_assets: list[str]) -> tuple[Optional[str], pd.DataFrame]:
+    """Scans priority exchanges concurrently using multithreading."""
+    log = logging.getLogger("backtest")
+    log.info(f"Initiating rapid multi-thread scan for {ticker}...")
+    
+    all_exchanges = PRIORITY_EXCHANGES 
+    
+    # Create the shared kill switch
+    stop_event = threading.Event()
+    
+    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        # Notice we are now passing `stop_event` to the worker
+        future_to_ex = {
+            executor.submit(check_single_exchange, ex_id, ticker, start, end, quote_assets, stop_event): ex_id 
+            for ex_id in all_exchanges
+        }
+        
+        for future in concurrent.futures.as_completed(future_to_ex):
+            try:
+                source_label, df = future.result()
+                if not df.empty:
+                    # TRIGGER THE KILL SWITCH for all other running threads
+                    stop_event.set()
+                    executor.shutdown(wait=False, cancel_futures=True)
+                    return source_label, df
+            except Exception as e:
+                continue
+                
+    log.info(f"   => [FAILED] {ticker} not found on any priority exchange.")
     return None, pd.DataFrame()
 
 def get_klines(b_client: Client, cg_client: CoinGeckoClient,
                 ticker: str, quotes: list[str],
                 symbol_cache: dict,
                 start: datetime, end: datetime) -> tuple[Optional[str], pd.DataFrame, str]:
-    """
-    Hierarchy: 
-    1. Binance Spot (15m)
-    2. CoinGecko (Hourly Approximation)
-    3. Global CCXT Scan (Hourly)
-    """
-    # 1. Binance (Primary)
+    
+    # 1. Binance Spot (Full Year+ History)
     sym = resolve_binance_symbol(b_client, ticker, quotes, symbol_cache)
     if sym:
         df = fetch_binance_klines(b_client, sym, start, end)
         if not df.empty:
             return sym, df, "binance"
 
-    # 2. CoinGecko (Fallback)
+    # 2. CoinGecko (Strictly capped at 89 days to prevent it from giving Daily candles)
     coin_id = cg_client.find_id(ticker)
     if coin_id:
-        df = cg_client.fetch_klines(coin_id, int(start.timestamp()), int(end.timestamp()))
+        cg_start = max(start, end - timedelta(days=89))
+        df = cg_client.fetch_klines(coin_id, int(cg_start.timestamp()), int(end.timestamp()))
         if not df.empty:
             return f"CG:{coin_id}", df, "coingecko"
 
-    # 3. Global CCXT Scan (Last Resort)
-    logging.getLogger("backtest").info(f"Scanning global exchanges for {ticker}...")
-    source_label, df = find_on_any_exchange(ticker, start, end)
+    # 3. Global CCXT Scan (Already setup to fetch & cache Full History)
+    source_label, df = find_on_any_exchange(ticker, start, end, quotes)
     if not df.empty:
         return source_label, df, "ccxt_global"
 
     return None, pd.DataFrame(), "none"
-
 # ----------------------------------------------------------------------------
 # Simulator (parameterised by Strategy)
 # ----------------------------------------------------------------------------
@@ -568,12 +632,22 @@ def main() -> int:
         sig_time = datetime.fromisoformat(sig["time"])
         if sig_time.tzinfo is None:
             sig_time = sig_time.replace(tzinfo=timezone.utc)
-        end_time = sig_time + timedelta(days=MAX_HOLD_DAYS)
+
+        # --- SMART CACHING TIMESTAMP LOGIC ---
+        # 1. Start from Jan 1st of the year prior to the signal (guarantees >= 1 year of data)
+        # e.g., A signal in 2026 will fetch data starting from Jan 1, 2025.
+        start_time = datetime(sig_time.year - 1, 1, 1, tzinfo=timezone.utc)
+        
+        # 2. End at exactly 23:59:59 of TODAY
+        # By fixing this to midnight, the timestamps sent to the cache file are identical 
+        # all day long, ensuring the cache file name never changes!
+        end_time = datetime.now(timezone.utc).replace(hour=23, minute=59, second=59, microsecond=0)
 
         symbol_label, klines, source = get_klines(
             b_client, cg_client, ticker, quote_assets, symbol_cache,
-            sig_time, end_time,
+            start_time, end_time,
         )
+
         if klines.empty or symbol_label is None:
             log.info("[%d/%d] SKIP %s: no data anywhere", i, len(entries), ticker)
             continue

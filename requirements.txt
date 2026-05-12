@@ -4,6 +4,8 @@ python-dotenv>=1.0
 pillow>=10.0
 pytesseract>=0.3.10
 aiohttp>=3.9
+ccxt>=4.2.0
+tqdm>=4.66
 # --- browser mode (main_browser.py) ---
 playwright>=1.44
 httpx>=0.27

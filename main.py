@@ -52,15 +52,15 @@ def maybe_ocr_text(message_text: str, image_path: Optional[str]) -> str:
 async def main() -> None:
     setup_logging()
     log = logging.getLogger("main")
-
-    problems = settings.validate()
+    
+        problems = settings.validate()
     if problems:
         log.error("Invalid configuration:")
         for p in problems:
             log.error("  - %s", p)
         sys.exit(1)
-
     db = DB(settings.db_path)
+    
     binance = BinanceWrapper(
         api_key=settings.binance_key,
         api_secret=settings.binance_secret,
