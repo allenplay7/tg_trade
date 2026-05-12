@@ -1,14 +1,12 @@
 """Parse Telegram messages from the signal channel into structured trade actions.
 
 Kinds:
-    ENTRY        - new spot trade: ticker + entry + at least one TP + SL
+    ENTRY        - new spot trade: ticker + entry + at least one TP (SL optional, will auto-fill)
     CLOSE        - close an existing position (only if ticker explicit)
     UPDATE_SL    - move stop-loss for an existing position
     TP_HIT_INFO  - informational, notify only
     AMBIGUOUS    - looks tradable but cannot parse confidently
     IGNORE       - non-actionable commentary
-
-Rule: anything we cannot parse with high confidence becomes AMBIGUOUS or IGNORE.
 """
 from __future__ import annotations
 
@@ -46,12 +44,13 @@ class ParsedSignal:
         return self.kind in (SignalKind.ENTRY, SignalKind.CLOSE, SignalKind.UPDATE_SL)
 
 
-_TICKER_RE = re.compile(r"(?:^|[^A-Za-z0-9])\$([A-Za-z0-9]{1,15})\b")
+# Improved Regex: Now catches $TICKER or "BUY TICKER" or "TICKER/USDT"
+_TICKER_RE = re.compile(r"(?:\$|(?:\b(?:BUY|LONG|TRADE)\s+))([A-Z0-9]{2,12})\b", re.IGNORECASE)
 _NUMBER_RE = re.compile(r"(?<![\d.])(\d+(?:\.\d+)?)")
-_ENTRY_KW_RE = re.compile(r"\bentry\b", re.IGNORECASE)
-_TP_KW_RE = re.compile(r"\b(?:tp|target|targets)\b", re.IGNORECASE)
-_SL_KW_RE = re.compile(r"\b(?:sl|stop[\s-]?loss)\b", re.IGNORECASE)
-_CMP_RE = re.compile(r"\bcmp\b", re.IGNORECASE)
+_ENTRY_KW_RE = re.compile(r"\b(?:entry|entries|buying|buy\s+at)\b", re.IGNORECASE)
+_TP_KW_RE = re.compile(r"\b(?:tp|target|targets|take[\s-]?profit)\b", re.IGNORECASE)
+_SL_KW_RE = re.compile(r"\b(?:sl|stop[\s-]?loss|stop)\b", re.IGNORECASE)
+_CMP_RE = re.compile(r"\b(?:cmp|current\s+price|market\s+price|now)\b", re.IGNORECASE)
 
 _RISK_RE = re.compile(
     r"\b("
@@ -61,8 +60,8 @@ _RISK_RE = re.compile(
     r")\b",
     re.IGNORECASE,
 )
-_SHORT_RE = re.compile(r"\bshort\b", re.IGNORECASE)
-_CLOSE_RE = re.compile(r"\bclose\b", re.IGNORECASE)
+_SHORT_RE = re.compile(r"\b(?:short|sell|future)\b", re.IGNORECASE)
+_CLOSE_RE = re.compile(r"\b(?:close|exit|sold|sell\s+all)\b", re.IGNORECASE)
 _TP_HIT_RE = re.compile(
     r"\b(?:first\s+target|tp\s*1|target\s+(?:hit|crushed|reached)|"
     r"first\s+tp|target\s+1\s+(?:hit|crushed))\b",
@@ -73,6 +72,7 @@ _SET_SL_RE = re.compile(
     re.IGNORECASE,
 )
 
+DEFAULT_SL_PERCENT = 0.10  # 10% auto-stop loss if missing
 
 def parse(text: str) -> ParsedSignal:
     if not text or not text.strip():
@@ -83,11 +83,13 @@ def parse(text: str) -> ParsedSignal:
     sig.is_short = bool(_SHORT_RE.search(text))
     tickers = _extract_tickers(text)
 
+    # 1. Informational TP Hits
     if _looks_like_tp_hit(text):
         sig.kind = SignalKind.TP_HIT_INFO
         sig.ticker = tickers[0] if tickers else None
         return sig
 
+    # 2. Close Signal
     if _looks_like_close(text):
         if len(tickers) == 1:
             sig.kind = SignalKind.CLOSE
@@ -97,6 +99,7 @@ def parse(text: str) -> ParsedSignal:
             sig.notes.append("Close message but ticker not explicit")
         return sig
 
+    # 3. Stop Loss Update
     if _looks_like_set_sl(text):
         nums = _numbers(text)
         if len(tickers) == 1 and nums:
@@ -108,11 +111,13 @@ def parse(text: str) -> ParsedSignal:
             sig.notes.append("SL update but ticker or price not explicit")
         return sig
 
+    # 4. Entry Detection
     entry_match = _ENTRY_KW_RE.search(text)
     tp_match = _TP_KW_RE.search(text)
     sl_match = _SL_KW_RE.search(text)
 
-    if not (entry_match and tp_match and sl_match):
+    # If it doesn't have at least Entry and TP, it's commentary
+    if not (entry_match and tp_match):
         sig.kind = SignalKind.IGNORE
         return sig
 
@@ -123,57 +128,65 @@ def parse(text: str) -> ParsedSignal:
 
     if not tickers:
         sig.kind = SignalKind.AMBIGUOUS
-        sig.notes.append("Entry/TP/SL pattern present but no $TICKER")
-        return sig
-
-    if len(tickers) > 1:
-        sig.kind = SignalKind.AMBIGUOUS
-        sig.ticker = tickers[0]
-        sig.notes.append(f"Multiple tickers found: {tickers}")
+        sig.notes.append("Entry/TP pattern present but no ticker found")
         return sig
 
     sig.ticker = tickers[0]
+    if len(tickers) > 1:
+        sig.notes.append(f"Multiple tickers found: {tickers}, using first.")
 
-    spans = sorted(
-        [
-            ("ENTRY", entry_match.start(), entry_match.end()),
-            ("TP", tp_match.start(), tp_match.end()),
-            ("SL", sl_match.start(), sl_match.end()),
-        ],
-        key=lambda x: x[1],
-    )
-    sections: dict[str, str] = {}
-    for i, (name, _s, end) in enumerate(spans):
-        next_start = spans[i + 1][1] if i + 1 < len(spans) else len(text)
-        sections[name] = text[end:next_start]
+    # Sectional Extraction
+    # Logic: Identify boundaries of Entry, TP, and SL sections
+    found_segments = [("ENTRY", entry_match.start())]
+    if tp_match: found_segments.append(("TP", tp_match.start()))
+    if sl_match: found_segments.append(("SL", sl_match.start()))
+    
+    found_segments.sort(key=lambda x: x[1])
+    
+    sections = {}
+    for i in range(len(found_segments)):
+        label, start = found_segments[i]
+        end = found_segments[i+1][1] if i+1 < len(found_segments) else len(text)
+        sections[label] = text[start:end]
 
-    entry_section = sections.get("ENTRY", "")
-    sig.entry_is_market = bool(_CMP_RE.search(entry_section))
-    entry_nums = _numbers(entry_section)
+    # Parse Entry
+    entry_text = sections.get("ENTRY", "")
+    sig.entry_is_market = bool(_CMP_RE.search(entry_text))
+    entry_nums = _numbers(entry_text)
     if entry_nums:
         sig.entry_price = entry_nums[0]
 
-    tp_section = sections.get("TP", "")
-    if "%" in tp_section:
-        sig.take_profits = _numbers(tp_section)
-        sig.take_profits_are_pct = bool(sig.take_profits)
-    else:
-        sig.take_profits = _numbers(tp_section)
+    # Parse TP
+    tp_text = sections.get("TP", "")
+    sig.take_profits = _numbers(tp_text)
+    sig.take_profits_are_pct = "%" in tp_text
 
-    sl_section = sections.get("SL", "")
-    sl_nums = _numbers(sl_section)
+    # Parse SL
+    sl_text = sections.get("SL", "")
+    sl_nums = _numbers(sl_text)
     if sl_nums:
         sig.stop_loss = sl_nums[0]
 
-    if not sig.take_profits or sig.stop_loss is None:
+    # Validation & Post-Processing
+    if not sig.take_profits:
         sig.kind = SignalKind.AMBIGUOUS
-        sig.notes.append("Could not extract TP or SL numbers")
+        sig.notes.append("Could not extract any TP numbers")
         return sig
 
     if not sig.entry_is_market and sig.entry_price is None:
         sig.kind = SignalKind.AMBIGUOUS
-        sig.notes.append("Entry section had neither CMP nor a numeric price")
+        sig.notes.append("No entry price or CMP found")
         return sig
+
+    # Handle Missing Stop Loss
+    if sig.stop_loss is None:
+        if sig.entry_price:
+            # Fallback SL = Entry - 10%
+            sig.stop_loss = round(sig.entry_price * (1 - DEFAULT_SL_PERCENT), 8)
+            sig.notes.append(f"Missing SL: Auto-generated at {DEFAULT_SL_PERCENT*100}% below entry")
+        else:
+            # If it's CMP and no price listed, we can't calculate SL yet
+            sig.notes.append("Missing SL: Could not auto-calc because entry price is CMP")
 
     sig.kind = SignalKind.ENTRY
     return sig
@@ -181,10 +194,17 @@ def parse(text: str) -> ParsedSignal:
 
 def _extract_tickers(text: str) -> List[str]:
     seen: List[str] = []
-    for m in _TICKER_RE.finditer(text):
+    # Check for $TICKER first
+    for m in re.finditer(r"\$([A-Z0-9]{2,12})\b", text, re.I):
         t = m.group(1).upper()
-        if t not in seen:
-            seen.append(t)
+        if t not in seen: seen.append(t)
+    
+    # Fallback to keyword-based ticker detection if none found with $
+    if not seen:
+        for m in _TICKER_RE.finditer(text):
+            t = m.group(1).upper()
+            if t not in seen: seen.append(t)
+            
     return seen
 
 
@@ -196,7 +216,7 @@ def _looks_like_close(text: str) -> bool:
     if not _CLOSE_RE.search(text):
         return False
     lowered = text.lower()
-    if "close 70" in lowered or "don't close" in lowered or "do not close" in lowered:
+    if "don't close" in lowered or "do not close" in lowered:
         return False
     return True
 

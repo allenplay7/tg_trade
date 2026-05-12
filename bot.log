@@ -322,3 +322,34 @@ Entry mode: MARKET
 2026-05-12 19:06:32,048 [WARNING] main: Browser context closed - run_bot will return for restart
 2026-05-12 19:06:32,280 [INFO] main: Scrolling channel to latest message...
 2026-05-12 19:06:32,282 [WARNING] main: scroll-to-latest failed: Page.evaluate: Target page, context or browser has been closed
+2026-05-12 21:08:20,338 [INFO] main: Date filter active: 2026-05-12T00:00:00+00:00
+2026-05-12 21:08:20,617 [INFO] main: Launching browser (headless=False)...
+2026-05-12 21:08:20,889 [INFO] main: Navigating to https://web.telegram.org/k/#-2607815374
+2026-05-12 21:08:23,458 [INFO] main: Scrolling channel to latest message...
+2026-05-12 21:08:25,472 [INFO] main: Installing message observer...
+2026-05-12 21:08:25,475 [INFO] main: Observer installed: max MID = 4294968643
+2026-05-12 21:08:26,619 [INFO] httpx: HTTP Request: POST https://api.telegram.org/bot8486971253:AAHMZRr3O4P13DdC_PNW48O89T1MXvnTzVg/sendMessage "HTTP/1.1 200 OK"
+2026-05-12 21:08:26,620 [INFO] main: Bot running. Browser stays alive until something closes it; then we auto-restart.
+2026-05-12 21:08:50,091 [INFO] main: Frame navigated: https://web.telegram.org/k/#@yagacalls47
+2026-05-12 21:08:50,092 [WARNING] main: Different chat selected (https://web.telegram.org/k/#@yagacalls47) - navigating back
+2026-05-12 21:08:50,104 [INFO] main: Frame navigated: https://web.telegram.org/k/#-2607815374
+2026-05-12 21:08:50,111 [INFO] main: Frame navigated: https://web.telegram.org/k/#@yagacalls47
+2026-05-12 21:08:50,111 [WARNING] main: Different chat selected (https://web.telegram.org/k/#@yagacalls47) - navigating back
+2026-05-12 21:08:50,114 [INFO] main: Frame navigated: https://web.telegram.org/k/#@yagacalls47
+2026-05-12 21:08:50,114 [WARNING] main: Different chat selected (https://web.telegram.org/k/#@yagacalls47) - navigating back
+2026-05-12 21:08:50,118 [INFO] main: Frame navigated: https://web.telegram.org/k/#-2607815374
+2026-05-12 21:08:50,121 [INFO] main: Frame navigated: https://web.telegram.org/k/#-2607815374
+2026-05-12 21:08:50,124 [INFO] main: Frame navigated: https://web.telegram.org/k/#-2607815374
+2026-05-12 21:08:50,250 [INFO] main: Frame navigated: https://web.telegram.org/k/#-2607815374
+2026-05-12 21:08:50,268 [INFO] main: Frame navigated: https://web.telegram.org/k/#-2607815374
+2026-05-12 21:08:52,326 [WARNING] main: scroll-to-latest failed: Page.evaluate: Execution context was destroyed, most likely because of a navigation
+2026-05-12 21:08:52,327 [WARNING] main: scroll-to-latest failed: Page.evaluate: Execution context was destroyed, most likely because of a navigation
+2026-05-12 21:08:52,327 [WARNING] main: scroll-to-latest failed: Page.evaluate: Execution context was destroyed, most likely because of a navigation
+2026-05-12 21:08:52,327 [INFO] main: Frame navigated: https://web.telegram.org/k/#-2607815374
+2026-05-12 21:08:52,370 [WARNING] main: Observer missing - reinstalling
+2026-05-12 21:08:52,750 [INFO] main: Frame navigated: https://web.telegram.org/k/#-2607815374
+2026-05-12 21:08:52,759 [WARNING] main: Observer missing - reinstalling
+2026-05-12 21:08:54,385 [INFO] main: Observer reinstalled: maxMid=4294968643
+2026-05-12 21:08:54,790 [INFO] main: Observer reinstalled: maxMid=4294968643
+2026-05-12 21:10:08,129 [WARNING] main: Page closed - run_bot will return for restart
+2026-05-12 21:10:08,288 [WARNING] main: Browser context closed - run_bot will return for restart

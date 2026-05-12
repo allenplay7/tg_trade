@@ -1,26 +1,104 @@
 {
-  "total_trades": 13,
-  "wins": 4,
-  "losses": 9,
-  "flat": 0,
-  "win_rate_pct": 30.76923076923077,
-  "gross_profit_usdt": 2.200115069739441,
-  "gross_loss_usdt": 1.750420684354383,
-  "profit_factor": 1.256906462203354,
-  "net_pnl_usdt": 0.4496943853850578,
-  "max_drawdown_pct": -1.5346474467442222,
-  "max_drawdown_usdt": -1.5655747226557963,
-  "sharpe_annualized": 1.9620438617498204,
-  "avg_win_usdt": 0.5500287674348603,
-  "avg_loss_usdt": -0.194491187150487,
-  "avg_duration_hours": 70.90384615384616,
-  "by_outcome": {
-    "TIMEOUT": 8,
-    "TP": 3,
-    "SL": 2
+  "strategies": {
+    "A_SELL_ALL_TP1": {
+      "label": "Sell all at TP1",
+      "total_trades": 148,
+      "wins": 57,
+      "losses": 91,
+      "flat": 0,
+      "win_rate_pct": 38.513513513513516,
+      "gross_profit_usdt": 616.3307446292354,
+      "gross_loss_usdt": 975.2301433132695,
+      "profit_factor": 0.6319849205391652,
+      "net_pnl_usdt": -358.89939868403394,
+      "total_fees_usdt": 58.59940000263721,
+      "max_drawdown_pct": -374.66880252594865,
+      "max_drawdown_usdt": -407.3323983547668,
+      "sharpe_annualized": -3.613463045371658,
+      "avg_win_usdt": 10.812820081214655,
+      "avg_loss_usdt": -10.716814761684281,
+      "avg_duration_hours": 82.12827728415918,
+      "avg_win_duration_hours": 59.19234878167641,
+      "avg_loss_duration_hours": 96.49473799450548,
+      "by_outcome": {
+        "FULL_SL": 69,
+        "ALL_TPS_FILLED": 50,
+        "FULL_TIMEOUT": 29
+      }
+    },
+    "B_TIERED_FIXED_SL": {
+      "label": "60/30/10 at TP1/TP2/TP3, fixed SL",
+      "total_trades": 148,
+      "wins": 51,
+      "losses": 97,
+      "flat": 0,
+      "win_rate_pct": 34.45945945945946,
+      "gross_profit_usdt": 679.6641240034047,
+      "gross_loss_usdt": 994.8654455008752,
+      "profit_factor": 0.6831719073941912,
+      "net_pnl_usdt": -315.2013214974703,
+      "total_fees_usdt": 58.686971299604274,
+      "max_drawdown_pct": -410.5170951837181,
+      "max_drawdown_usdt": -382.7478695890246,
+      "sharpe_annualized": -3.2126046359626024,
+      "avg_win_usdt": 13.326747529478524,
+      "avg_loss_usdt": -10.256344798978095,
+      "avg_duration_hours": 129.98953991178678,
+      "avg_win_duration_hours": 190.57217155773418,
+      "avg_loss_duration_hours": 98.13681605670102,
+      "by_outcome": {
+        "FULL_SL": 69,
+        "FULL_TIMEOUT": 29,
+        "PARTIAL+TIMEOUT": 19,
+        "ALL_TPS_FILLED": 18,
+        "PARTIAL+SL": 13
+      }
+    },
+    "C_TIERED_TRAIL_AFTER_TP1": {
+      "label": "60/30/10 at TPs, trailing 5% after TP1",
+      "total_trades": 148,
+      "wins": 57,
+      "losses": 91,
+      "flat": 0,
+      "win_rate_pct": 38.513513513513516,
+      "gross_profit_usdt": 624.9317396104668,
+      "gross_loss_usdt": 975.2301433132695,
+      "profit_factor": 0.6408043720708931,
+      "net_pnl_usdt": -350.29840370280255,
+      "total_fees_usdt": 58.616636465525445,
+      "max_drawdown_pct": -368.0201546206562,
+      "max_drawdown_usdt": -392.6530758781149,
+      "sharpe_annualized": -3.5803927469764316,
+      "avg_win_usdt": 10.96371473000819,
+      "avg_loss_usdt": -10.716814761684281,
+      "avg_duration_hours": 85.61633179804805,
+      "avg_win_duration_hours": 68.24905173001949,
+      "avg_loss_duration_hours": 96.49473799450548,
+      "by_outcome": {
+        "FULL_SL": 69,
+        "PARTIAL+TRAIL": 45,
+        "FULL_TIMEOUT": 29,
+        "ALL_TPS_FILLED": 5
+      }
+    }
   },
-  "position_size_usdt": 6.0,
-  "max_concurrent": 10,
+  "position_size_usdt": 100.0,
+  "max_concurrent": 0,
+  "fee_bps": 20.0,
   "init_cash": 100.0,
-  "lookback_days": 30
+  "usdt_to_aud": 1.378929950358522,
+  "max_hold_days": 14,
+  "generated_at": "2026-05-12T11:23:41.870087+00:00",
+  "trailing_stop_pct": 5.0,
+  "data_source_counts": {
+    "binance": 357,
+    "coingecko": 87
+  },
+  "best_by": {
+    "net_pnl_usdt": "B_TIERED_FIXED_SL",
+    "profit_factor": "B_TIERED_FIXED_SL",
+    "win_rate_pct": "A_SELL_ALL_TP1",
+    "sharpe_annualized": "B_TIERED_FIXED_SL",
+    "max_drawdown_pct": "B_TIERED_FIXED_SL"
+  }
 }
