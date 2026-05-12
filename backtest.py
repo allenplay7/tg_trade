@@ -136,12 +136,7 @@ def save_symbol_cache(cache: dict) -> None:
         pass
 
 
-def resolve_binance_symbol(client: Client, ticker: str,
-                            quotes: list[str], cache: dict) -> Optional[str]:
-    key = f"{ticker.upper()}|{','.join(quotes)}"
-    if key in cache:
-        return cache[key]
-    found: Optional[str] = None
+def resolve_binance_symbol(client: Client, ticker: str, quotes: list[str]) -> Optional[str]:
     for q in quotes:
         sym = f"{ticker.upper()}{q}"
         try:
@@ -152,10 +147,8 @@ def resolve_binance_symbol(client: Client, ticker: str,
             continue
         if info and info.get("status") == "TRADING" \
                 and info.get("isSpotTradingAllowed", True):
-            found = sym
-            break
-    cache[key] = found
-    return found
+            return sym
+    return None
 
 
 # ----------------------------------------------------------------------------
@@ -322,26 +315,60 @@ def get_klines(b_client: Client, cg_client: CoinGeckoClient,
                 symbol_cache: dict,
                 start: datetime, end: datetime) -> tuple[Optional[str], pd.DataFrame, str]:
     
-    # 1. Binance Spot (Full Year+ History)
-    sym = resolve_binance_symbol(b_client, ticker, quotes, symbol_cache)
+    # --- 0. CHECK UNIVERSAL CACHE ---
+    if ticker in symbol_cache:
+        cache_val = symbol_cache[ticker]
+        
+        # If we already know it failed everywhere, skip instantly
+        if cache_val == "FAILED":
+            return None, pd.DataFrame(), "none"
+            
+        source = cache_val.get("source")
+        sym = cache_val.get("symbol")
+
+        # Route directly to the known successful platform
+        if source == "binance":
+            df = fetch_binance_klines(b_client, sym, start, end)
+            if not df.empty: return sym, df, source
+        elif source == "coingecko":
+            coin_id = sym.replace("CG:", "")
+            cg_start = max(start, end - timedelta(days=89))
+            df = cg_client.fetch_klines(coin_id, int(cg_start.timestamp()), int(end.timestamp()))
+            if not df.empty: return sym, df, source
+        elif source == "ccxt_global":
+            # sym looks like "ccxt:mexc:USELESS/USDT"
+            parts = sym.split(":")
+            ex_id = parts[1]
+            pair = parts[2]
+            df = fetch_ccxt_ohlcv(ex_id, ticker, start, end, pair)
+            if not df.empty: return sym, df, source
+
+    # --- 1. BINANCE SPOT ---
+    sym = resolve_binance_symbol(b_client, ticker, quotes)
     if sym:
         df = fetch_binance_klines(b_client, sym, start, end)
         if not df.empty:
+            symbol_cache[ticker] = {"source": "binance", "symbol": sym}
             return sym, df, "binance"
 
-    # 2. CoinGecko (Strictly capped at 89 days to prevent it from giving Daily candles)
+    # --- 2. COINGECKO ---
     coin_id = cg_client.find_id(ticker)
     if coin_id:
         cg_start = max(start, end - timedelta(days=89))
         df = cg_client.fetch_klines(coin_id, int(cg_start.timestamp()), int(end.timestamp()))
         if not df.empty:
-            return f"CG:{coin_id}", df, "coingecko"
+            sym_label = f"CG:{coin_id}"
+            symbol_cache[ticker] = {"source": "coingecko", "symbol": sym_label}
+            return sym_label, df, "coingecko"
 
-    # 3. Global CCXT Scan (Already setup to fetch & cache Full History)
+    # --- 3. GLOBAL CCXT SCAN ---
     source_label, df = find_on_any_exchange(ticker, start, end, quotes)
     if not df.empty:
+        symbol_cache[ticker] = {"source": "ccxt_global", "symbol": source_label}
         return source_label, df, "ccxt_global"
 
+    # --- 4. FAILED EVERYWHERE ---
+    symbol_cache[ticker] = "FAILED"
     return None, pd.DataFrame(), "none"
 # ----------------------------------------------------------------------------
 # Simulator (parameterised by Strategy)
